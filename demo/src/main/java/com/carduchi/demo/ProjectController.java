@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+
 
 
 import java.io.InputStream;
@@ -15,8 +19,21 @@ import java.io.File;
 public class ProjectController {
     private final ProjectRepository repo;
 
+    @Autowired
     public ProjectController(ProjectRepository repo) {
         this.repo = repo;
+    }
+
+    @PostConstruct
+    public void initData() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            InputStream is = new ClassPathResource("projects.json").getInputStream();
+            List<Project> projects = mapper.readValue(is, new TypeReference<>() {});
+            repo.saveAll(projects);
+        } catch (Exception e) {
+            System.err.println("❌ Failed to load data: " + e.getMessage());
+        }
     }
 
     @GetMapping
