@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Portfolio Website",
+    "description": "A clean, modern portfolio for my work",
+    "githubLink": "https://github.com/you/portfolio",
+    "imageUrl": "/images/portfolio.png"
+  },
+  {
+    "title": "E-Commerce Site",
+    "description": "Full-stack shop with Java backend",
+    "githubLink": "https://github.com/you/ecommerce",
+    "imageUrl": "/images/ecommerce.png"
+  }
+]
