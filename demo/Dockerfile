@@ -4,11 +4,11 @@ FROM eclipse-temurin:17-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy all files
+# Copy files
 COPY . .
 
-# Build the application
-RUN ./mvnw package
+# Make mvnw executable, then build
+RUN chmod +x mvnw && ./mvnw package
 
-# Run the JAR
+# Run the app
 CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
